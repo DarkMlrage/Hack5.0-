@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdownTime: 8.5
-  sceneToLoad: 1
+  sceneToLoad: 2
 --- !u!1 &149847370
 GameObject:
   m_ObjectHideFlags: 0
