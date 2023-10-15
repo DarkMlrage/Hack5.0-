@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MainAtack : Atack
-{
+{    
     private List<EnemyAI> enemyToDestroy = new List<EnemyAI>();
 
     public override void DealAtack()

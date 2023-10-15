@@ -11,11 +11,16 @@ public class PlayerAtack : MonoBehaviour
     [SerializeField] Atack atack2;
     [SerializeField] Atack atack3;
 
+    [SerializeField] SoundSwitcher soundSwitcher;
+
     private void Update()
     {
         if (Input.GetMouseButton(0))
-        {
+        {            
             mainAtack.DealAtack();
-        }   
+        }
+        else
+        {            
+        }
     }
 }

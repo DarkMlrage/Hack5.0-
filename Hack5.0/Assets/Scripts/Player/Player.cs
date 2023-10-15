@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerAnimator))]
 public class Player : MonoBehaviour
 {
     [SerializeField] PlayerAnimator playerAnimator;
-
+    [SerializeField] AudioManager audioManager;
 
     [SerializeField] public float health;
     [SerializeField] private float damage;
@@ -16,12 +17,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerAnimator = GetComponent<PlayerAnimator>();
-    }
-
-
-    void Update()
-    {
-        
     }
 
     public void TakeDamage(float dmg)
@@ -33,6 +28,8 @@ public class Player : MonoBehaviour
 
         health -= dmg;
 
+        audioManager.PlayRandomSound();
+
         if (health <= 0)
         {
             Die();
@@ -41,7 +38,6 @@ public class Player : MonoBehaviour
 
     private void Die() // помиранн€ гравц€
     {
-        animator.SetBool("isDying", true);
-
+        SceneManager.LoadSceneAsync(1);
     }
 }
