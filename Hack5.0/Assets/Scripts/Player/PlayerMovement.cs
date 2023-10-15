@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using EZCameraShake;
-using TreeEditor;
-using Unity.Mathematics;
 
 [RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(SpriteRenderer))]
