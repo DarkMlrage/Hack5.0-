@@ -2047,7 +2047,7 @@ MonoBehaviour:
   atack1: {fileID: 0}
   atack2: {fileID: 0}
   atack3: {fileID: 0}
-  soundSwitcher: {fileID: 0}
+  audioManager: {fileID: 1060171967}
 --- !u!114 &1060171964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2147,6 +2147,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 70c733334fa4b3a4892b443564dfb4a7, type: 3}
   - {fileID: 8300000, guid: 3ea67d199d74cc54d9daf958eca17a10, type: 3}
   - {fileID: 8300000, guid: 4f9e92616503a394fbc268c84e9d14c0, type: 3}
+  - {fileID: 8300000, guid: 3830cf1f4dfed1542857a2ee6cb5aeb9, type: 3}
+  - {fileID: 8300000, guid: 0b88857b957370342a261cf93052f3df, type: 3}
 --- !u!82 &1060171968
 AudioSource:
   m_ObjectHideFlags: 0

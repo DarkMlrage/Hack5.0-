@@ -11,16 +11,21 @@ public class PlayerAtack : MonoBehaviour
     [SerializeField] Atack atack2;
     [SerializeField] Atack atack3;
 
-    [SerializeField] SoundSwitcher soundSwitcher;
+    public AudioManager audioManager; // Посилання на AudioManager
+
 
     private void Update()
     {
+
         if (Input.GetMouseButton(0))
-        {            
+        {
+            audioManager.PlaySound3Once();
             mainAtack.DealAtack();
+            audioManager.PlaySound4Looped();
         }
         else
-        {            
+        {
+            audioManager.StopSound4Looped();
         }
     }
 }
