@@ -2,36 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
+using TreeEditor;
+using Unity.Mathematics;
 
+[RequireComponent(typeof(PlayerAnimator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerMovement : MonoBehaviour
 {
-
+    [SerializeField] PlayerAnimator playerAnimator;
     [SerializeField] private float moveSpeed = 5f;
-
     public Rigidbody2D rb;
+    private bool isLeftMouseButtonPressed = false;
+    private SpriteRenderer spriteRenderer;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        playerAnimator = GetComponent<PlayerAnimator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        Vector2 moveInput = InputManager.Instance.control.Main.Move.ReadValue<Vector2>();
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Перевірка стану лівої кнопки мишки
+        if (Input.GetMouseButton(0))
         {
-            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+            isLeftMouseButtonPressed = true;
         }
+        else
+        {
+            isLeftMouseButtonPressed = false;
+        }
+
+        Movement(moveInput, mousePosition);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Movement(Vector2 input, Vector3 mousePosition)
     {
-        Movement(InputManager.Instance.control.Main.Move.ReadValue<Vector2>());
-    }
 
-    void Movement(Vector2 input)
-    {
-        rb.MovePosition(rb.position + input * moveSpeed * Time.fixedDeltaTime);
+        if (isLeftMouseButtonPressed && mousePosition.x < transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (isLeftMouseButtonPressed && mousePosition.x > transform.position.x)
+        {
+            spriteRenderer.flipX = false;
+        }
+
+        if (input.x != 0 || input.y != 0)
+        {
+            playerAnimator.isMoving(true);
+            rb.MovePosition(rb.position + input * moveSpeed * Time.fixedDeltaTime);
+
+            if (!isLeftMouseButtonPressed)
+            {
+                if (input.x < 0)
+                {
+                    spriteRenderer.flipX = true;
+                }
+                else if (input.x > 0)
+                {
+                    spriteRenderer.flipX = false;
+                }
+            }
+        }
+        else
+        {
+            playerAnimator.isMoving(false);
+        }
     }
 }

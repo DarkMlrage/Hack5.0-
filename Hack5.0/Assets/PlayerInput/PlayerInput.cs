@@ -37,7 +37,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""MainAttack"",
                     ""type"": ""Button"",
                     ""id"": ""7b830ffb-b9cf-496b-af96-53e3ebc26db1"",
                     ""expectedControlType"": ""Button"",
@@ -61,7 +61,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""2fbc663f-81ee-4ada-9f25-c773c30a89f6"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
@@ -72,7 +72,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""fa6ecfc6-c4d2-4dde-bdea-ce014204fb08"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
@@ -83,7 +83,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""7ce676d1-e9cd-4a3f-a1fc-1dd5e704ca00"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
@@ -94,7 +94,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""d6290d6a-2670-4b10-b287-b6a77c3ff181"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
@@ -109,7 +109,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Attack"",
+                    ""action"": ""MainAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -665,7 +665,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Main
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
-        m_Main_Attack = m_Main.FindAction("Attack", throwIfNotFound: true);
+        m_Main_MainAttack = m_Main.FindAction("MainAttack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -740,13 +740,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Main;
     private List<IMainActions> m_MainActionsCallbackInterfaces = new List<IMainActions>();
     private readonly InputAction m_Main_Move;
-    private readonly InputAction m_Main_Attack;
+    private readonly InputAction m_Main_MainAttack;
     public struct MainActions
     {
         private @PlayerInput m_Wrapper;
         public MainActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Main_Move;
-        public InputAction @Attack => m_Wrapper.m_Main_Attack;
+        public InputAction @MainAttack => m_Wrapper.m_Main_MainAttack;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -759,9 +759,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
+            @MainAttack.started += instance.OnMainAttack;
+            @MainAttack.performed += instance.OnMainAttack;
+            @MainAttack.canceled += instance.OnMainAttack;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -769,9 +769,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
+            @MainAttack.started -= instance.OnMainAttack;
+            @MainAttack.performed -= instance.OnMainAttack;
+            @MainAttack.canceled -= instance.OnMainAttack;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -928,7 +928,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IMainActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
+        void OnMainAttack(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

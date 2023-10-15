@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : State // Спокійний стан
+public class IdleState 
+    : State // Спокійний стан
 {
     private Enemy enemy;
     private float waitTime;

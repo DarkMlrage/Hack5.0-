@@ -74,6 +74,10 @@ public class Enemy : Entity
         return Vector2.Distance(new Vector2(transform.position.x, transform.position.y), new Vector2(target.x, target.y));
     }
 
+    public void MoveToPoint(Vector3 target)
+    { 
+        rb.AddForce(speed * target);
+    }
     public void Attack(string animBoolName)
     {
         if (Time.time >= TimerBetweenAttack)
