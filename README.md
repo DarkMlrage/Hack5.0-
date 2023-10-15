@@ -1,3 +1,4 @@
 # Hack5.0-
-Папка: Release
-Запуск файлу Live or Burn.exe
+- Архів: Build розархівувати
+- Запуск файлу Live or Burn.exe
+- Насолоджуватися грою
